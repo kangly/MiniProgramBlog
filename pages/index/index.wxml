@@ -1,0 +1,11 @@
+<!--index.wxml-->
+<view class="container">
+  <view class="cards-area">
+        <view wx:for="{{articles}}">
+            <view data-id="{{item.id}}" bindtap="postDetail" wx:if="{{item.id}}">
+                <card title="{{item.title}}" content="{{item.summary}}" date="{{item.posted_at}}" views="{{item.views}}" thumbnail="{{item.thumb}}"/>
+            </view>
+        </view>
+    </view>
+    <text class="info" wx:if="{{info}}">{{info}}</text>
+</view>
