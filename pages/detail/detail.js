@@ -16,14 +16,13 @@ Page({
       url: `https://kangly.club/api/article/${that.data.article.id}`,
       success: (res) => {
         that.setData({
-          article: {
-            title: res.data.data.title,
-            image: res.data.data.image,
-            author: res.data.data.author,
-            content: res.data.data.content,
-            posted_at: res.data.data.posted_at,
-            views: res.data.data.views,
-            votes: res.data.data.votes
+          article: { 
+            title: res.data.title,
+            author: res.data.author,
+            content: res.data.content,
+            posted_at: res.data.posted_at,
+            views: res.data.views,
+            votes: res.data.votes
           }
         })
         // 引入 wxParse 组件处理文章正文

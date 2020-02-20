@@ -6,7 +6,6 @@
         <text class="posted-date">{{article.posted_at}}</text>
     </view>
     <view class="content">
-        <image lazy-load='true' style='max-width:100%;max-height:200px;' src='{{article.image}}'></image>
         <import src="../components/wxParse/wxParse.wxml"/>
         <template is="wxParse" data="{{wxParseData:article_content.nodes}}"/>
     </view>

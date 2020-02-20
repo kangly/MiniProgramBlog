@@ -12,17 +12,17 @@ Page({
   loadArticles: function () {
     var that = this
     wx.request({
-      url: `https://kangly.club/api/articles?page=${that.data.currentPage}`,
+      url: `https://kangly.club/api/articles/${that.data.currentPage}`,
       success: (res) => {
         if (res.data.message === 'success') {
-          if (res.data.articles.length == 0) {
+          if (res.data.articles.data.length == 0) {
             that.setData({
               isLoadingMore: false,
               info: '我是有底线的'
             });
           }
           that.setData({
-            articles: that.data.articles.concat(res.data.articles)
+            articles: that.data.articles.concat(res.data.articles.data)
           })
         } else {
           that.setData({
@@ -35,12 +35,14 @@ Page({
   },
   onReachBottom: function () {
     this.data.currentPage++
-    if (this.data.isLoadingMore && this.data.currentPage > 10) {
-      // 最多加载10页
+    if (this.data.isLoadingMore) {
       this.data.isLoadingMore = false
       this.data.info = '我是有底线的'
       return
     }
+    wx.showLoading({
+      title: '加载中...'
+    })
     this.data.isLoadingMore = true
     this.loadArticles()
   },
@@ -65,6 +67,6 @@ Page({
     wx.showLoading({
       title: '加载中...'
     })
-    this.loadArticles()
+    this.loadArticles();
   }
 })
