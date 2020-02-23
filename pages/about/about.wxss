@@ -3,6 +3,7 @@
   -webkit-font-smoothing: antialiased;
   padding: 0 25rpx;
   height: auto; 
+  background-color: #fff;
 }
 .title {
   font-size: 18px;

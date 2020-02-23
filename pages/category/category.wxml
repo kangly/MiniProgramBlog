@@ -1,0 +1,12 @@
+<!--pages/category/category.wxml-->
+<view class="cu-list menu card-menu margin-top" wx:for="{{categorys}}">
+    <view class="cu-item" data-id="{{item.id}}" bindtap="postCategoryDetail">
+        <view class="content padding-tb-sm">
+            <view>
+                <text class="cuIcon-title text-orange"></text>
+                {{item.title}}
+            </view>
+            <view class="text-gray text-sm">{{item.text}}</view>
+        </view>
+    </view>
+</view>

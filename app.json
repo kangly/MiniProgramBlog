@@ -3,7 +3,9 @@
     "pages/index/index",
     "pages/logs/logs",
     "pages/detail/detail",
-    "pages/about/about"
+    "pages/about/about",
+    "pages/category/category",
+    "pages/list/list"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -24,6 +26,12 @@
         "text": "首页",
         "iconPath": "/images/index.png",
         "selectedIconPath": "/images/index_h1.png"
+      },
+      {
+        "pagePath": "pages/category/category",
+        "text": "类别",
+        "iconPath": "/images/category.png",
+        "selectedIconPath": "/images/category_h1.png"
       },
       {
         "pagePath": "pages/about/about",
