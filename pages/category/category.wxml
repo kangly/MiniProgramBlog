@@ -6,7 +6,7 @@
                 <text class="cuIcon-title text-orange"></text>
                 {{item.title}}
             </view>
-            <view class="text-gray text-sm">{{item.text}}</view>
+            <view class="text-gray text-sm">{{item.intro}}</view>
         </view>
     </view>
 </view>

@@ -1,16 +1,14 @@
 <!--pages/components/card/card.wxml-->
 <view class="card">
+    <view class="img-area">
+        <image src='{{thumbnail}}' class="thumbnail" mode="widthFix"/>
+    </view>
     <text class="title">{{title}}</text>
     <view class="content-area">
-        <view class="left-area">
-            <text class="card-content">{{content}}</text>
-            <view class="info-area">
-                <text class="posted-date">{{date}}</text>
-                <text class="views">{{views}}</text>
-            </view>
-        </view>
-        <view class="right-area">
-            <image src='{{thumbnail}}' class="thumbnail" mode="aspectFill"/>
+        <text class="card-content">{{content}}</text>
+        <view class="info-area">
+            <text class="posted-date">{{date}}</text>
+            <text class="views">{{views}}</text>
         </view>
     </view>
 </view>

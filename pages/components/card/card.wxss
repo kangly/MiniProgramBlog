@@ -28,12 +28,10 @@
 }
 .card .content-area {
   display: -webkit-box;
-}
-.card .content-area .left-area {
   -webkit-box-orient: vertical;
   -webkit-box-flex: 1;
 }
-.card .content-area .left-area .card-content {
+.card .content-area .card-content {
   line-height: 1.5;
   font-size: 14px;
   margin: 10rpx 0 20rpx 0;
@@ -45,29 +43,24 @@
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
 }
-.card .content-area .left-area .info-area {
+.card .content-area .info-area {
   font-size: 10pt;
   color: #666;
   opacity: 0.8;
   font-family: 'iconfont';
 }
-.card .content-area .left-area .info-area .posted-date:before {
+.card .content-area .info-area .posted-date:before {
   content: '\e64e';
   margin-right: 10rpx;
 }
-.card .content-area .left-area .info-area .views {
+.card .content-area .info-area .views {
   margin-left: 30rpx;
 }
-.card .content-area .left-area .info-area .views:before {
+.card .content-area .info-area .views:before {
   content: '\e666';
   margin-right: 10rpx;
 }
-.card .content-area .right-area {
-  margin-left: 20rpx;
-}
-.card .content-area .thumbnail {
-  width: 150rpx;
-  height: 150rpx;
-  background-color: #eee;
-  margin-top: 26rpx;
+.card .img-area .thumbnail {
+  width: 100%;
+  margin-bottom: 20rpx;
 }

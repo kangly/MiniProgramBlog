@@ -5,28 +5,34 @@ Page({
    * 页面的初始数据
    */
   data: {
-    categorys: [
-      {
-        'id': 1,
-        'title': '测试1',
-        'text': '这是一条测试数据1'
+    categorys: [],
+    info: ''
+  },
+  loadCategory: function () {
+    var that = this
+    wx.showLoading({
+      title: '加载中'
+    })
+    wx.request({
+      url: `https://kangly.club/api/category`,
+      success: (res) => {
+        if (res.data.message === 'success') {
+          that.setData({
+            categorys: res.data.items
+          })
+        } else {
+          that.setData({
+            info: '获取类别数据失败，请重试'
+          })
+        }
       },
-      {
-        'id': 2,
-        'title': '测试2',
-        'text': '这是一条测试数据2'
+      fail: function () {
+        that.data.info = '获取类别数据失败'
       },
-      {
-        'id': 3,
-        'title': '测试3',
-        'text': '这是一条测试数据3'
-      },
-      {
-        'id': 4,
-        'title': '测试4',
-        'text': '这是一条测试数据4'
+      complete: function () {
+        wx.hideLoading()
       }
-    ]
+    })
   },
 
   postCategoryDetail: function(event) {
@@ -39,7 +45,10 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    wx.showLoading({
+      title: '加载中...'
+    })
+    this.loadCategory();
   },
 
   /**
