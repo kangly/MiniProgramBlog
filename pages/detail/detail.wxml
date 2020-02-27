@@ -11,7 +11,7 @@
     </view>
     <view class="meta-footer">
         <text class="views">{{article.views}}</text>
-        <text class="votes">{{article.votes}}</text>
+        <!-- <text class="votes">{{article.votes}}</text> -->
     </view>
     <text class="info" wx:if="{{info}}">{{info}}</text>
 </view>

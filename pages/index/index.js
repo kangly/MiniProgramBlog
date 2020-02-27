@@ -16,10 +16,17 @@ Page({
       success: (res) => {
         if (res.data.message === 'success') {
           if (res.data.articles.data.length == 0) {
-            that.setData({
-              isLoadingMore: false,
-              info: '我是有底线的'
-            });
+            if (that.data.currentPage==1){
+              that.setData({
+                isLoadingMore: false,
+                info: '哎呀！还没有文章'
+              });
+            }else{
+              that.setData({
+                isLoadingMore: false,
+                info: '我是有底线的'
+              });
+            }
           }
           that.setData({
             articles: that.data.articles.concat(res.data.articles.data)
@@ -49,7 +56,7 @@ Page({
   onShareAppMessage() {
     return {
       title: '小康博客',
-      path: '/pages/index'
+      path: '/pages/index/index'
     }
   },
   postDetail: function (event) {

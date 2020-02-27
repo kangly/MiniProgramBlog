@@ -37,7 +37,7 @@ Page({
 
   postCategoryDetail: function(event) {
     wx.navigateTo({
-      url: '/pages/list/list?id=' + event.currentTarget.dataset.id,
+      url: '/pages/list/list?id=' + event.currentTarget.dataset.id + '&title=' + event.currentTarget.dataset.title,
     })
   },
 

@@ -1,24 +1,12 @@
 <!--pages/list/list.wxml-->
 <view class="container">
+  <view class="title margin-bottom">{{title}}</view>
   <view class="cards-area">
-        <view wx:for="{{articles}}">
-            <view data-id="{{item.id}}" bindtap="postDetail" wx:if="{{item.id}}">
-                <view class="card">
-                  <text class="title">{{item.title}}</text>
-                  <view class="content-area">
-                      <view class="left-area">
-                          <text class="card-content">{{item.summary}}</text>
-                          <view class="info-area">
-                              <text class="posted-date">{{item.date}}</text>
-                              <text class="views">{{item.views}}</text>
-                          </view>
-                      </view>
-                      <view class="right-area">
-                          <image src='{{item.thumb}}' class="thumbnail" mode="aspectFill"/>
-                      </view>
-                  </view>
-              </view>
-            </view>
+    <view wx:for="{{articles}}">
+        <view data-id="{{item.id}}" bindtap="postDetail" wx:if="{{item.id}}">
+            <card title="{{item.title}}" content="{{item.summary}}" date="{{item.posted_at}}" views="{{item.views}}" thumbnail="{{item.thumb}}"/>
         </view>
     </view>
+  </view>
+  <text class="info" wx:if="{{info}}">{{info}}</text>
 </view>

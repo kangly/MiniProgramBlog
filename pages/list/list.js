@@ -5,48 +5,58 @@ Page({
    * 页面的初始数据
    */
   data: {
-    articles: [
-      {
-        'id': 1,
-        'title': '测试文章标题1',
-        'summary': '测试文章内容',
-        'date': '2018-09-01',
-        'views': 100,
-        'thumb': ''
-      },
-      {
-        'id': 2,
-        'title': '测试文章标题2',
-        'summary': '测试文章内容',
-        'date': '2018-09-01',
-        'views': 100,
-        'thumb': ''
-      },
-      {
-        'id': 3,
-        'title': '测试文章标题3',
-        'summary': '测试文章内容',
-        'date': '2018-09-01',
-        'views': 100,
-        'thumb': ''
-      },
-      {
-        'id': 4,
-        'title': '测试文章标题4',
-        'summary': '测试文章内容',
-        'date': '2018-09-01',
-        'views': 100,
-        'thumb': ''
-      },
-      {
-        'id': 5,
-        'title': '测试文章标题5',
-        'summary': '测试文章内容',
-        'date': '2018-09-01',
-        'views': 100,
-        'thumb': ''
-      },
-    ]
+    articles: [],
+    isLoadingMore: false,
+    currentPage: 1,
+    info: '',
+    id: 0,
+    title: ''
+  },
+
+  loadArticles: function () {
+    var that = this
+    wx.request({
+      url: `https://kangly.club/api/category/article?id=${that.data.id}&page=${that.data.currentPage}`,
+      success: (res) => {
+        if (res.data.message === 'success') {
+          if (res.data.articles.length == 0) {
+            if (that.data.currentPage == 1) {
+              that.setData({
+                isLoadingMore: false,
+                info: '哎呀！还没有文章'
+              });
+            } else {
+              that.setData({
+                isLoadingMore: false,
+                info: '我是有底线的'
+              });
+            }
+          }
+          that.setData({
+            articles: that.data.articles.concat(res.data.articles)
+          })
+        } else {
+          that.setData({
+            info: '列表加载失败，请重试'
+          })
+        }
+        wx.hideLoading()
+      }
+    })
+  },
+
+  onReachBottom: function () {
+    this.data.currentPage++
+    if (this.data.isLoadingMore) {
+      this.data.isLoadingMore = false
+      this.data.info = '我是有底线的'
+      return
+    }
+    wx.showLoading({
+      title: '加载中...'
+    })
+    this.data.isLoadingMore = true
+    this.loadArticles()
   },
 
   postDetail: function (event) {
@@ -59,7 +69,14 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    wx.showLoading({
+      title: '加载中...'
+    })
+    this.setData({ 
+      id: options.id,
+      title: options.title
+    })
+    this.loadArticles();
   },
 
   /**

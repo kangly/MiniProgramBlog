@@ -4,6 +4,7 @@
   padding: 0 25rpx;
   height: auto; 
   background-color: #fff;
+  margin: 20rpx 10rpx
 }
 .title {
   font-size: 18px;

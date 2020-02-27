@@ -21,8 +21,7 @@ Page({
             author: res.data.author,
             content: res.data.content,
             posted_at: res.data.posted_at,
-            views: res.data.views,
-            votes: res.data.votes
+            views: res.data.views
           }
         })
         // 引入 wxParse 组件处理文章正文
