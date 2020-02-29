@@ -33,3 +33,5 @@
     width: 70rpx;
     height: 70rpx; 
 }
+.action{width:150rpx;}
+.cu-bar.search{width:100%}

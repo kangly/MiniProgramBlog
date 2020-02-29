@@ -1,0 +1,11 @@
+<template name="search">
+  <view class="cu-bar search bg-white margin-bottom">
+    <view class="search-form round">
+      <text class="cuIcon-search"></text>
+      <input class="input" type="text" placeholder="搜索文章标题" bindinput="wxSearchButton" bindconfirm="wxSearchInput" confirm-type="search"></input>
+    </view>
+    <view class="action">
+      <button class="cu-btn bg-green shadow-blur round" bindtap="wxSearchInput">搜索</button>
+    </view>
+  </view>
+</template>

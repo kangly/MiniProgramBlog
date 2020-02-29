@@ -1,28 +1,30 @@
-//index.js
-//获取应用实例
-const app = getApp()
-
+// pages/search/search.js
 Page({
+
+  /**
+   * 页面的初始数据
+   */
   data: {
     articles: [],
     isLoadingMore: false,
     currentPage: 1,
     info: '',
+    id: 1,
     keywords: ''
   },
   loadArticles: function () {
     var that = this
     wx.request({
-      url: `https://kangly.club/api/articles/${that.data.currentPage}`,
+      url: `https://kangly.club/api/article/search?keywords=${that.data.keywords}&page=${that.data.currentPage}`,
       success: (res) => {
         if (res.data.message === 'success') {
           if (res.data.articles.length == 0) {
-            if (that.data.currentPage==1){
+            if (that.data.currentPage == 1) {
               that.setData({
                 isLoadingMore: false,
                 info: '哎呀！还没有文章'
               });
-            }else{
+            } else {
               that.setData({
                 isLoadingMore: false,
                 info: '我是有底线的'
@@ -54,45 +56,70 @@ Page({
     this.data.isLoadingMore = true
     this.loadArticles()
   },
-  onShareAppMessage() {
-    return {
-      title: '小康博客',
-      path: '/pages/index/index'
-    }
-  },
   postDetail: function (event) {
     wx.navigateTo({
       url: '/pages/detail/detail?id=' + event.currentTarget.dataset.id,
     })
   },
-  wxSearchInput: function (e) {
-    if (this.data.keywords){
-      wx.navigateTo({
-        url: '/pages/search/search?keywords=' + this.data.keywords,
-      })
-    }else{
-      wx.showToast({
-        title: '请输入搜索内容',
-        icon: 'none',
-        duration: 1500
-      })
-    }
-  },
-  wxSearchButton: function (e) {
-    this.setData({
-      keywords: e.detail.value
-    })
-  },
-  //事件处理函数
-  bindViewTap: function() {
-    wx.navigateTo({
-      url: '../logs/logs'
-    })
-  },
-  onLoad: function () {
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad: function (options) {
     wx.showLoading({
       title: '加载中...'
     })
+    this.setData({
+      keywords: options.keywords
+    })
     this.loadArticles();
+  },
+
+  /**
+   * 生命周期函数--监听页面初次渲染完成
+   */
+  onReady: function () {
+
+  },
+
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function () {
+
+  },
+
+  /**
+   * 生命周期函数--监听页面隐藏
+   */
+  onHide: function () {
+
+  },
+
+  /**
+   * 生命周期函数--监听页面卸载
+   */
+  onUnload: function () {
+
+  },
+
+  /**
+   * 页面相关事件处理函数--监听用户下拉动作
+   */
+  onPullDownRefresh: function () {
+
+  },
+
+  /**
+   * 页面上拉触底事件的处理函数
+   */
+  onReachBottom: function () {
+
+  },
+
+  /**
+   * 用户点击右上角分享
+   */
+  onShareAppMessage: function () {
+
   }
 })

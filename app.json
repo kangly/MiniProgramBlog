@@ -5,7 +5,8 @@
     "pages/detail/detail",
     "pages/about/about",
     "pages/category/category",
-    "pages/list/list"
+    "pages/list/list",
+    "pages/search/search"
   ],
   "window": {
     "backgroundTextStyle": "light",

@@ -1,7 +1,6 @@
-<!--index.wxml-->
+<!--pages/search/search.wxml-->
 <view class="container">
-  <import src="../search/index.wxml" />
-  <template is="search"></template>
+  <view class="title margin-bottom">【{{keywords}}】的搜索结果如下：</view>
   <view class="cards-area">
     <view wx:for="{{articles}}">
         <view data-id="{{item.id}}" bindtap="postDetail" wx:if="{{item.id}}">
