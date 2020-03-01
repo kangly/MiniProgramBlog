@@ -1,5 +1,5 @@
 /* pages/detail/detail.wxss */
-@import "../components/wxParse/wxParse.wxss";
+@import "../../components/wxParse/wxParse.wxss";
 @font-face {
   font-family: "iconfont";
   src: url("iconfont.eot?t=1545831519864");

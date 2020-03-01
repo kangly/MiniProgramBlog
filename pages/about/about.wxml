@@ -1,8 +1,0 @@
-<!--pages/about/about.wxml-->
-<view class="container">
-    <view class="title">关于我们</view>
-    <view class="content">
-        主要包含个人博客分享和优质文章转载。
-    </view>
-    <text class="info" wx:if="{{info}}">{{info}}</text>
-</view>

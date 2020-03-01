@@ -6,7 +6,7 @@
         <text class="posted-date">{{article.posted_at}}</text>
     </view>
     <view class="content">
-        <import src="../components/wxParse/wxParse.wxml"/>
+        <import src="../../components/wxParse/wxParse.wxml"/>
         <template is="wxParse" data="{{wxParseData:article_content.nodes}}"/>
     </view>
     <view class="meta-footer">

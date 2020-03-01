@@ -1,12 +1,14 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/logs/logs",
     "pages/detail/detail",
-    "pages/about/about",
-    "pages/category/category",
-    "pages/list/list",
-    "pages/search/search"
+    "pages/search/bar/bar",
+    "pages/search/search/search",
+    "pages/category/category/category",
+    "pages/category/list/list",
+    "pages/about/index/index",
+    "pages/about/log/log",
+    "pages/about/about/about"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -29,13 +31,13 @@
         "selectedIconPath": "/images/index_h1.png"
       },
       {
-        "pagePath": "pages/category/category",
+        "pagePath": "pages/category/category/category",
         "text": "类别",
         "iconPath": "/images/category.png",
         "selectedIconPath": "/images/category_h1.png"
       },
       {
-        "pagePath": "pages/about/about",
+        "pagePath": "pages/about/index/index",
         "text": "关于",
         "iconPath": "/images/about.png",
         "selectedIconPath": "/images/about_h1.png"

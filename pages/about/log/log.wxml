@@ -1,0 +1,39 @@
+<!--pages/about/log/log.wxml-->
+<view class="cu-timeline">
+  <view class="cu-item text-green">
+    <view class="bg-green content shadow">
+      <view class="cu-capsule radius">
+        <view class="cu-tag bg-white text-green">v1.2.0</view>
+        <view class="cu-tag line-white">待定</view>
+      </view>
+      <view class="margin-top-sm text-content">
+        <view>1.关于板块调整，增加选项</view>
+        <view>2.优化页面，减小体积</view>
+        <view>3.首页下拉刷新</view>
+        <view>4.待定...</view>
+      </view>
+    </view>
+  </view>
+  <view class="cu-item text-green">
+    <view class="bg-green content shadow">
+      <view class="cu-capsule radius">
+        <view class="cu-tag bg-white text-green">v1.1.0</view>
+        <view class="cu-tag line-white">2020/02/29</view>
+      </view>
+      <view class="margin-top-sm text-content">
+        <view>1.修复首页加载bug</view>
+        <view>2.页面增加分享功能</view>
+        <view>3.首页增加搜索功能</view>
+      </view>
+    </view>
+  </view>
+  <view class="cu-item text-green">
+    <view class="bg-green content shadow">
+      <view class="cu-capsule radius">
+        <view class="cu-tag bg-white text-green">v1.0.0</view>
+        <view class="cu-tag line-white">2020/02/27</view>
+      </view>
+      <view class="margin-top-sm text-content">1.0.0 版本上线，目前仅包含首页、类别页、详情页。</view>
+    </view>
+  </view>
+</view>

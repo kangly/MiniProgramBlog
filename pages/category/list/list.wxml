@@ -1,7 +1,6 @@
-<!--index.wxml-->
+<!--pages/category/list/list.wxml-->
 <view class="container">
-  <import src="../search/bar/bar.wxml" />
-  <template is="search_bar"></template>
+  <view class="title margin-bottom">{{title}}</view>
   <view class="cards-area">
     <view wx:for="{{articles}}">
         <view data-id="{{item.id}}" bindtap="postDetail" wx:if="{{item.id}}">

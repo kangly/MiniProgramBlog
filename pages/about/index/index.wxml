@@ -1,0 +1,39 @@
+<!--pages/about/index/index.wxml-->
+<scroll-view scroll-y class="scrollPage">
+  <view class="UCenter-bg">
+    <image src="../../../images/miniprogram.png" class="png" mode="widthFix"></image>
+    <view class="text-xl">小康博客
+      <text class="text-df">v1.0</text>
+    </view>
+    <view class="margin-top-sm">
+      <text>By:Kangly</text>
+    </view>
+  </view>
+  <view class="cu-list menu card-menu margin-top margin-bottom shadow-lg radius">
+    <view class="cu-item arrow">
+      <view class="content" bindtap="CopyLink" data-link="https://github.com/kangly/MiniProgramBlog">
+        <text class="cuIcon-github text-grey"></text>
+        <text class="text-grey">GitHub</text>
+      </view>
+    </view>
+    <view class="cu-item arrow">
+      <navigator class="content" url="/pages/about/about/about" hover-class="none">
+        <text class="cuIcon-read text-green"></text>
+        <text class="text-grey">关于博客</text>
+      </navigator>
+    </view>
+    <view class="cu-item arrow">
+      <navigator class="content" url="/pages/about/log/log" hover-class="none">
+        <text class="cuIcon-formfill text-green"></text>
+        <text class="text-grey">更新日志</text>
+      </navigator>
+    </view>
+    <view class="cu-item arrow">
+      <button class="cu-btn content" open-type="feedback">
+        <text class="cuIcon-writefill text-cyan"></text>
+        <text class="text-grey">意见反馈</text>
+      </button>
+    </view>
+  </view>
+  <view class="cu-tabbar-height"></view>
+</scroll-view>

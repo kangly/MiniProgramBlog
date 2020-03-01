@@ -1,93 +1,102 @@
-// pages/detail/detail.js
+// pages/category/category/category.js
 Page({
+
   /**
    * 页面的初始数据
    */
   data: {
-    article: {},
+    categorys: [],
     info: ''
   },
-  loadArticle: function () {
+  loadCategory: function () {
     var that = this
     wx.showLoading({
       title: '加载中'
     })
     wx.request({
-      url: `https://kangly.club/api/article/${that.data.article.id}`,
+      url: `https://kangly.club/api/category`,
       success: (res) => {
-        that.setData({
-          article: { 
-            title: res.data.title,
-            author: res.data.author,
-            content: res.data.content,
-            posted_at: res.data.posted_at,
-            views: res.data.views
-          }
-        })
-        // 引入 wxParse 组件处理文章正文
-        var wxParse = require('../../components/wxParse/wxParse.js')
-        wxParse.wxParse('article_content', 'html', that.data.article.content, that, 1)
+        if (res.data.message === 'success') {
+          that.setData({
+            categorys: res.data.items
+          })
+        } else {
+          that.setData({
+            info: '获取类别数据失败，请重试'
+          })
+        }
       },
       fail: function () {
-        that.data.info = '获取详情数据失败'
+        that.data.info = '获取类别数据失败'
       },
       complete: function () {
         wx.hideLoading()
       }
     })
   },
+
+  postCategoryDetail: function (event) {
+    wx.navigateTo({
+      url: '/pages/category/list/list?id=' + event.currentTarget.dataset.id + '&title=' + event.currentTarget.dataset.title,
+    })
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.data.article.id = options.id
-    this.loadArticle()
+    wx.showLoading({
+      title: '加载中...'
+    })
+    this.loadCategory();
   },
+
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
 
   },
+
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
 
   },
+
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
 
   },
+
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
 
   },
+
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
 
   },
+
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
 
   },
+
   /**
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-    let id = this.data.article.id
-    let title = this.data.article.title
-    return {
-      title: `小康博客 - ${title}`,
-      path: `/pages/detail/detail?id=${id}`
-    }
-  },
+
+  }
 })
