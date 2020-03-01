@@ -7,6 +7,72 @@ Page({
     article: {},
     info: ''
   },
+
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad: function (options) {
+    this.data.article.id = options.id
+    this.loadArticle()
+  },
+
+  /**
+   * 生命周期函数--监听页面初次渲染完成
+   */
+  onReady: function () {
+
+  },
+
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function () {
+
+  },
+
+  /**
+   * 生命周期函数--监听页面隐藏
+   */
+  onHide: function () {
+
+  },
+
+  /**
+   * 生命周期函数--监听页面卸载
+   */
+  onUnload: function () {
+
+  },
+
+  /**
+   * 页面相关事件处理函数--监听用户下拉动作
+   */
+  onPullDownRefresh: function () {
+
+  },
+
+  /**
+   * 页面上拉触底事件的处理函数
+   */
+  onReachBottom: function () {
+
+  },
+
+  /**
+   * 用户点击右上角分享
+   */
+  onShareAppMessage: function () {
+    let id = this.data.article.id
+    let title = this.data.article.title
+    return {
+      title: `小康博客 - ${title}`,
+      path: `/pages/detail/detail?id=${id}`
+    }
+  },
+
+  /**
+   * 加载文章详情
+   */
   loadArticle: function () {
     var that = this
     wx.showLoading({
@@ -16,7 +82,7 @@ Page({
       url: `https://kangly.club/api/article/${that.data.article.id}`,
       success: (res) => {
         that.setData({
-          article: { 
+          article: {
             title: res.data.title,
             author: res.data.author,
             content: res.data.content,
@@ -35,59 +101,5 @@ Page({
         wx.hideLoading()
       }
     })
-  },
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-    this.data.article.id = options.id
-    this.loadArticle()
-  },
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-    let id = this.data.article.id
-    let title = this.data.article.title
-    return {
-      title: `小康博客 - ${title}`,
-      path: `/pages/detail/detail?id=${id}`
-    }
-  },
+  }
 })

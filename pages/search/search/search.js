@@ -12,6 +12,7 @@ Page({
     id: 1,
     keywords: ''
   },
+
   loadArticles: function () {
     var that = this
     wx.request({
@@ -43,24 +44,13 @@ Page({
       }
     })
   },
-  onReachBottom: function () {
-    this.data.currentPage++
-    if (this.data.isLoadingMore) {
-      this.data.isLoadingMore = false
-      this.data.info = '我是有底线的'
-      return
-    }
-    wx.showLoading({
-      title: '加载中...'
-    })
-    this.data.isLoadingMore = true
-    this.loadArticles()
-  },
+
   postDetail: function (event) {
     wx.navigateTo({
       url: '/pages/detail/detail?id=' + event.currentTarget.dataset.id,
     })
   },
+  
   /**
    * 生命周期函数--监听页面加载
    */
@@ -113,7 +103,17 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-
+    this.data.currentPage++
+    if (this.data.isLoadingMore) {
+      this.data.isLoadingMore = false
+      this.data.info = '我是有底线的'
+      return
+    }
+    wx.showLoading({
+      title: '加载中...'
+    })
+    this.data.isLoadingMore = true
+    this.loadArticles()
   },
 
   /**

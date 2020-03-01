@@ -3,7 +3,7 @@
   <import src="../search/bar/bar.wxml" />
   <template is="search_bar"></template>
   <view class="cards-area">
-    <view wx:for="{{articles}}">
+    <view wx:for="{{articles}}" wx:key="item">
         <view data-id="{{item.id}}" bindtap="postDetail" wx:if="{{item.id}}">
             <card title="{{item.title}}" content="{{item.summary}}" date="{{item.posted_at}}" views="{{item.views}}" thumbnail="{{item.thumb}}"/>
         </view>

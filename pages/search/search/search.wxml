@@ -2,7 +2,7 @@
 <view class="container">
   <view class="title margin-bottom">【{{keywords}}】的搜索结果如下：</view>
   <view class="cards-area">
-    <view wx:for="{{articles}}">
+    <view wx:for="{{articles}}" wx:key="item">
         <view data-id="{{item.id}}" bindtap="postDetail" wx:if="{{item.id}}">
             <card title="{{item.title}}" content="{{item.summary}}" date="{{item.posted_at}}" views="{{item.views}}" thumbnail="{{item.thumb}}"/>
         </view>

@@ -13,58 +13,6 @@ Page({
     title: ''
   },
 
-  loadArticles: function () {
-    var that = this
-    wx.request({
-      url: `https://kangly.club/api/category/article?id=${that.data.id}&page=${that.data.currentPage}`,
-      success: (res) => {
-        if (res.data.message === 'success') {
-          if (res.data.articles.length == 0) {
-            if (that.data.currentPage == 1) {
-              that.setData({
-                isLoadingMore: false,
-                info: '哎呀！还没有文章'
-              });
-            } else {
-              that.setData({
-                isLoadingMore: false,
-                info: '我是有底线的'
-              });
-            }
-          }
-          that.setData({
-            articles: that.data.articles.concat(res.data.articles)
-          })
-        } else {
-          that.setData({
-            info: '列表加载失败，请重试'
-          })
-        }
-        wx.hideLoading()
-      }
-    })
-  },
-
-  onReachBottom: function () {
-    this.data.currentPage++
-    if (this.data.isLoadingMore) {
-      this.data.isLoadingMore = false
-      this.data.info = '我是有底线的'
-      return
-    }
-    wx.showLoading({
-      title: '加载中...'
-    })
-    this.data.isLoadingMore = true
-    this.loadArticles()
-  },
-
-  postDetail: function (event) {
-    wx.navigateTo({
-      url: '/pages/detail/detail?id=' + event.currentTarget.dataset.id,
-    })
-  },
-
   /**
    * 生命周期函数--监听页面加载
    */
@@ -118,7 +66,17 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-
+    this.data.currentPage++
+    if (this.data.isLoadingMore) {
+      this.data.isLoadingMore = false
+      this.data.info = '我是有底线的'
+      return
+    }
+    wx.showLoading({
+      title: '加载中...'
+    })
+    this.data.isLoadingMore = true
+    this.loadArticles()
   },
 
   /**
@@ -126,5 +84,49 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+
+  /**
+   * 加载该类别所属文章
+   */
+  loadArticles: function () {
+    var that = this
+    wx.request({
+      url: `https://kangly.club/api/category/article?id=${that.data.id}&page=${that.data.currentPage}`,
+      success: (res) => {
+        if (res.data.message === 'success') {
+          if (res.data.articles.length == 0) {
+            if (that.data.currentPage == 1) {
+              that.setData({
+                isLoadingMore: false,
+                info: '哎呀！还没有文章'
+              });
+            } else {
+              that.setData({
+                isLoadingMore: false,
+                info: '我是有底线的'
+              });
+            }
+          }
+          that.setData({
+            articles: that.data.articles.concat(res.data.articles)
+          })
+        } else {
+          that.setData({
+            info: '列表加载失败，请重试'
+          })
+        }
+        wx.hideLoading()
+      }
+    })
+  },
+
+  /**
+   * 点击标题跳转到详情页
+   */
+  postDetail: function (event) {
+    wx.navigateTo({
+      url: '/pages/detail/detail?id=' + event.currentTarget.dataset.id,
+    })
   }
 })

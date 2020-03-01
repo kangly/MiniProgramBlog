@@ -8,18 +8,6 @@ Page({
 
   },
 
-  CopyLink(e) {
-    wx.setClipboardData({
-      data: e.currentTarget.dataset.link,
-      success: res => {
-        wx.showToast({
-          title: '已复制',
-          duration: 1000,
-        })
-      }
-    })
-  },
-
   /**
    * 生命周期函数--监听页面加载
    */
@@ -74,5 +62,20 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+
+  /**
+   * 点击复制github链接
+   */
+  CopyLink(e) {
+    wx.setClipboardData({
+      data: e.currentTarget.dataset.link,
+      success: res => {
+        wx.showToast({
+          title: '已复制',
+          duration: 1000,
+        })
+      }
+    })
   }
 })

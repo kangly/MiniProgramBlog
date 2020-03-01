@@ -1,9 +1,9 @@
 <!--pages/about/index/index.wxml-->
 <scroll-view scroll-y class="scrollPage">
   <view class="UCenter-bg">
-    <image src="../../../images/miniprogram.png" class="png" mode="widthFix"></image>
+    <!-- <image src="../../../images/miniprogram.png" class="png" mode="widthFix"></image> -->
     <view class="text-xl">小康博客
-      <text class="text-df">v1.0</text>
+      <text class="text-df">v1.2</text>
     </view>
     <view class="margin-top-sm">
       <text>By:Kangly</text>
@@ -35,5 +35,4 @@
       </button>
     </view>
   </view>
-  <view class="cu-tabbar-height"></view>
 </scroll-view>

@@ -7,10 +7,9 @@
         <view class="cu-tag line-white">待定</view>
       </view>
       <view class="margin-top-sm text-content">
-        <view>1.关于板块调整，增加选项</view>
+        <view>1.底部关于导航页面调整</view>
         <view>2.优化页面，减小体积</view>
-        <view>3.首页下拉刷新</view>
-        <view>4.待定...</view>
+        <view>3.增加首页、类别下拉刷新</view>
       </view>
     </view>
   </view>
