@@ -3,13 +3,25 @@
   <view class="cu-item text-green">
     <view class="bg-green content shadow">
       <view class="cu-capsule radius">
+        <view class="cu-tag bg-white text-green">v1.2.1</view>
+        <view class="cu-tag line-white">2020/03/02</view>
+      </view>
+      <view class="margin-top-sm text-content">
+        <view>修复富文本解析无法解析code标签导致代码块无法正常显示的bug</view>
+      </view>
+    </view>
+  </view>
+  <view class="cu-item text-green">
+    <view class="bg-green content shadow">
+      <view class="cu-capsule radius">
         <view class="cu-tag bg-white text-green">v1.2.0</view>
-        <view class="cu-tag line-white">待定</view>
+        <view class="cu-tag line-white">2020/03/01</view>
       </view>
       <view class="margin-top-sm text-content">
         <view>1.底部关于导航页面调整</view>
         <view>2.优化页面，减小体积</view>
-        <view>3.增加首页、类别下拉刷新</view>
+        <view>3.增加首页下拉刷新</view>
+        <view>4.增加类别页下拉刷新</view>
       </view>
     </view>
   </view>
