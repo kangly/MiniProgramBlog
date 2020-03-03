@@ -9,3 +9,6 @@
 .cu-bar.search{
   width:100%
 }
+.notice_tip{
+  font-size: 24rpx;
+}

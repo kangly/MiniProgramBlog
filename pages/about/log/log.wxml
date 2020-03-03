@@ -1,5 +1,16 @@
 <!--pages/about/log/log.wxml-->
 <view class="cu-timeline">
+<view class="cu-item text-green">
+    <view class="bg-green content shadow">
+      <view class="cu-capsule radius">
+        <view class="cu-tag bg-white text-green">v1.3.0</view>
+        <view class="cu-tag line-white">2020/03/04</view>
+      </view>
+      <view class="margin-top-sm text-content">
+        <view>首页增加推荐轮播</view>
+      </view>
+    </view>
+  </view>
   <view class="cu-item text-green">
     <view class="bg-green content shadow">
       <view class="cu-capsule radius">

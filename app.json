@@ -8,7 +8,8 @@
     "pages/category/list/list",
     "pages/about/index/index",
     "pages/about/log/log",
-    "pages/about/about/about"
+    "pages/about/about/about",
+    "pages/swiper/swiper"
   ],
   "window": {
     "backgroundTextStyle": "light",

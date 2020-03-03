@@ -1,0 +1,7 @@
+<template name="swiper_list">
+  <swiper class="screen-swiper margin-bottom square-dot" indicator-dots="true" circular="true" autoplay="true" interval="5000" duration="500">
+    <swiper-item wx:for="{{swiperList}}" wx:key="item" data-id="{{item.id}}" bindtap="postDetail">
+      <image src="{{item.thumb}}" mode="aspectFill" wx:if="{{item.id}}"></image>
+    </swiper-item>
+  </swiper>
+</template>
