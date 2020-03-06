@@ -192,15 +192,19 @@ Page({
   onPullDownRefresh: function () {
     this.setData({
       articles: [],
+      swiperList: [],
       isLoadingMore: false,
       currentPage: 1,
       info: '',
-      keywords: ''
+      keywords: '',
+      cardCur: 0,
     })
     wx.showLoading({
-      title: '加载中...'
+      title: '加载中...',
+      mask: true 
     })
     this.loadArticles();
+    this.loadArticleRecommends();
     wx.stopPullDownRefresh()
   }
 })
