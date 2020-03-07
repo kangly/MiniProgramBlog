@@ -3,8 +3,20 @@
   <view class="cu-item text-green">
     <view class="bg-green content shadow">
       <view class="cu-capsule radius">
+        <view class="cu-tag bg-white text-green">v1.4.0</view>
+        <view class="cu-tag line-white">2020/03/07</view>
+      </view>
+      <view class="margin-top-sm text-content">
+        <view>1.文章浏览量统计</view>
+        <view>2.文章收藏功能</view>
+      </view>
+    </view>
+  </view>
+  <view class="cu-item text-green">
+    <view class="bg-green content shadow">
+      <view class="cu-capsule radius">
         <view class="cu-tag bg-white text-green">v1.3.1</view>
-        <view class="cu-tag line-white">2020/03/06</view>
+        <view class="cu-tag line-white">2020/03/05</view>
       </view>
       <view class="margin-top-sm text-content">
         <view>1.首页下拉刷新推荐轮播</view>

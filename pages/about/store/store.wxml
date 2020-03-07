@@ -1,0 +1,10 @@
+<!--pages/about/store/store.wxml-->
+<view class="cu-list margin-top menu" wx:for="{{articles}}" wx:key="item">
+  <view class="cu-item arrow" data-id="{{item.id}}" bindtap="postDetail">
+    <view class="content">
+      <text class="cuIcon-likefill text-grey"></text>
+      <text class="text-black">{{item.title}}</text>
+    </view>
+  </view>
+</view>
+<text class="info" wx:if="{{info}}">{{info}}</text>

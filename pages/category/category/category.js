@@ -1,6 +1,8 @@
 // pages/category/category/category.js
-Page({
+//获取应用实例
+const app = getApp()
 
+Page({
   /**
    * 页面的初始数据
    */
@@ -85,13 +87,21 @@ Page({
       title: '加载中'
     })
     wx.request({
-      url: `https://kangly.club/api/category`,
+      url: `https://kangly.club/api/category?token=${app.globalData.token}&jwt=1`,
       success: (res) => {
         if (res.data.message === 'success') {
           that.setData({
             categorys: res.data.items
           })
-        } else {
+        }
+        else if (res.data.code == 1001) {
+          app.userLogin().then(res => {
+            if (res.msg == 'success') {
+              this.loadCategory();
+            }
+          })
+        }
+        else {
           that.setData({
             info: '获取类别数据失败，请重试'
           })

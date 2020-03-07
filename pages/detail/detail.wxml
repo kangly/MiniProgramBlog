@@ -1,17 +1,17 @@
 <!--pages/detail/detail.wxml-->
 <view class="container">
-    <view class="title">{{article.title}}</view>
-    <view class="meta-header">
-        <text class="author">{{article.author}}</text>
-        <text class="posted-date">{{article.posted_at}}</text>
-    </view>
-    <view class="content">
-        <import src="../../components/wxParse/wxParse.wxml"/>
-        <template is="wxParse" data="{{wxParseData:article_content.nodes}}"/>
-    </view>
-    <view class="meta-footer">
-        <text class="views">{{article.views}}</text>
-        <!-- <text class="votes">{{article.votes}}</text> -->
-    </view>
-    <text class="info" wx:if="{{info}}">{{info}}</text>
+  <view class="title">{{article.title}}</view>
+  <view class="meta-header">
+    <text class="author">{{article.author}}</text>
+    <text class="posted-date">{{article.posted_at}}</text>
+  </view>
+  <view class="content">
+    <import src="../../components/wxParse/wxParse.wxml"/>
+    <template is="wxParse" data="{{wxParseData:article_content.nodes}}"/>
+  </view>
+  <view class="meta-footer">
+    <text class="cuIcon-attentionfill">{{article.views}}</text>
+    <text class="{{DotStyle?'cuIcon-likefill':'cuIcon-like'}}" bindtap="postStore" data-id="{{article.id}}" data-store="{{article.store}}"></text>
+  </view>
+  <text class="info" wx:if="{{info}}">{{info}}</text>
 </view>

@@ -1,5 +1,6 @@
 {
   "usingComponents": {
     "card": "../../components/card/card"
-  }
+  },
+  "navigationBarTitleText": "小康博客 - 搜索"
 }

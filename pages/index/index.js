@@ -3,6 +3,9 @@
 const app = getApp()
 
 Page({
+   /**
+   * 页面的初始数据
+   */
   data: {
     articles: [],
     swiperList: [],
@@ -10,9 +13,83 @@ Page({
     currentPage: 1,
     info: '',
     keywords: '',
-    cardCur: 0,
-    openid: app.globalData.openid
+    cardCur: 0
   },
+
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad: function () {
+    wx.showLoading({
+      title: '加载中...'
+    })
+    // var token = wx.getStorageSync("token");
+    var token = app.globalData.token;
+    if (token==''){
+      app.userLogin().then(res => {
+        if (res.msg=='success') {
+          this.loadArticles();
+          this.loadArticleRecommends();
+          this.towerSwiper('swiperList');
+        }
+      })
+    }else {
+      this.loadArticles();
+      this.loadArticleRecommends();
+      this.towerSwiper('swiperList');
+    }
+  },
+
+  /**
+ * 生命周期函数--监听页面初次渲染完成
+ */
+  onReady: function () {
+
+  },
+
+  /**
+ * 生命周期函数--监听页面显示
+ */
+  onShow: function () {
+
+  },
+
+  /**
+   * 生命周期函数--监听页面隐藏
+   */
+  onHide: function () {
+
+  },
+
+  /**
+ * 生命周期函数--监听页面卸载
+ */
+  onUnload: function () {
+
+  },
+
+  /**
+ * 页面相关事件处理函数--监听用户下拉动作
+ */
+  onPullDownRefresh: function () {
+    this.setData({
+      articles: [],
+      swiperList: [],
+      isLoadingMore: false,
+      currentPage: 1,
+      info: '',
+      keywords: '',
+      cardCur: 0,
+    })
+    wx.showLoading({
+      title: '加载中...',
+      mask: true
+    })
+    this.loadArticles();
+    this.loadArticleRecommends();
+    wx.stopPullDownRefresh()
+  },
+
   /**
    * 页面上拉触底事件的处理函数
    */
@@ -39,24 +116,14 @@ Page({
       path: '/pages/index/index'
     }
   },
-  loadArticleRecommends: function () {
-    var that = this
-    wx.request({
-      url: `https://kangly.club/api/article/recommend`,
-      success: (res) => {
-        if (res.data.message === 'success') {
-          that.setData({
-            swiperList: res.data.articles
-          })
-        }
-        wx.hideLoading()
-      }
-    })
-  },
+
+  /**
+   * 文章列表
+   */
   loadArticles: function () {
     var that = this
     wx.request({
-      url: `https://kangly.club/api/articles/${that.data.currentPage}`,
+      url: `https://kangly.club/api/article/show?page=${that.data.currentPage}&token=${app.globalData.token}&jwt=1`,
       success: (res) => {
         if (res.data.message === 'success') {
           if (res.data.articles.length == 0) {
@@ -75,7 +142,15 @@ Page({
           that.setData({
             articles: that.data.articles.concat(res.data.articles)
           })
-        } else {
+        } 
+        else if (res.data.code==1001){
+          app.userLogin().then(res => {
+            if (res.msg == 'success') {
+              this.loadArticles();
+            }
+          })
+        }
+        else {
           that.setData({
             info: '列表加载失败，请重试'
           })
@@ -84,11 +159,44 @@ Page({
       }
     })
   },
+
+  /**
+   * 文章推荐列表
+   */
+  loadArticleRecommends: function () {
+    var that = this
+    wx.request({
+      url: `https://kangly.club/api/article/recommend?token=${app.globalData.token}&jwt=1`,
+      success: (res) => {
+        if (res.data.message === 'success') {
+          that.setData({
+            swiperList: res.data.articles
+          })
+        }
+        else if (res.data.code == 1001) {
+          app.userLogin().then(res => {
+            if (res.msg == 'success') {
+              this.loadArticles();
+            }
+          })
+        }
+        wx.hideLoading()
+      }
+    })
+  },
+
+  /**
+   * 点击跳转至详情
+   */
   postDetail: function (event) {
     wx.navigateTo({
       url: '/pages/detail/detail?id=' + event.currentTarget.dataset.id,
     })
   },
+
+  /**
+   * 搜索跳转
+   */
   wxSearchInput: function (e) {
     if (this.data.keywords){
       wx.navigateTo({
@@ -102,27 +210,14 @@ Page({
       })
     }
   },
+
+  /**
+   * 设置搜索内容
+   */
   wxSearchButton: function (e) {
     this.setData({
       keywords: e.detail.value
     })
-  },
-
-  //事件处理函数
-  bindViewTap: function() {
-    wx.navigateTo({
-      url: '../logs/logs'
-    })
-  },
-
-  onLoad: function () {
-    wx.showLoading({
-      title: '加载中...'
-    })
-    this.loadArticles();
-    this.loadArticleRecommends();
-    this.towerSwiper('swiperList');
-    // 初始化towerSwiper 传已有的数组名即可
   },
   
   // cardSwiper
@@ -131,6 +226,7 @@ Page({
       cardCur: e.detail.current
     })
   },
+
   // towerSwiper
   // 初始化towerSwiper
   towerSwiper(name) {
@@ -143,18 +239,21 @@ Page({
       swiperList: list
     })
   },
+
   // towerSwiper触摸开始
   towerStart(e) {
     this.setData({
       towerStart: e.touches[0].pageX
     })
   },
+
   // towerSwiper计算方向
   towerMove(e) {
     this.setData({
       direction: e.touches[0].pageX - this.data.towerStart > 0 ? 'right' : 'left'
     })
   },
+
   // towerSwiper计算滚动
   towerEnd(e) {
     let direction = this.data.direction;
@@ -184,27 +283,5 @@ Page({
         swiperList: list
       })
     }
-  },
-  
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-    this.setData({
-      articles: [],
-      swiperList: [],
-      isLoadingMore: false,
-      currentPage: 1,
-      info: '',
-      keywords: '',
-      cardCur: 0,
-    })
-    wx.showLoading({
-      title: '加载中...',
-      mask: true 
-    })
-    this.loadArticles();
-    this.loadArticleRecommends();
-    wx.stopPullDownRefresh()
   }
 })

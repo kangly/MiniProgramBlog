@@ -3,13 +3,19 @@
   <view class="UCenter-bg">
     <!-- <image src="../../../images/miniprogram.png" class="png" mode="widthFix"></image> -->
     <view class="text-xl">小康博客
-      <text class="text-df">v1.2</text>
+      <text class="text-df">v1.4</text>
     </view>
     <view class="margin-top-sm">
       <text>By:Kangly</text>
     </view>
   </view>
   <view class="cu-list menu card-menu margin-top margin-bottom shadow-lg radius">
+    <view class="cu-item arrow">
+      <navigator class="content" url="/pages/about/store/store" hover-class="none">
+        <text class="cuIcon-likefill text-grey"></text>
+        <text class="text-grey">我的收藏</text>
+      </navigator>
+    </view>
     <view class="cu-item arrow">
       <view class="content" bindtap="CopyLink" data-link="https://github.com/kangly/MiniProgramBlog">
         <text class="cuIcon-github text-grey"></text>

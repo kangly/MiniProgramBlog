@@ -39,17 +39,17 @@
   margin: 15rpx 0 20rpx;
   font-family: 'iconfont'; 
 }
-.meta-footer .views:before {
-  content: '\e666';
-  margin-right: 10rpx; 
+.meta-footer .cuIcon-attentionfill {
+  margin-left: 10rpx; 
+  float: left; 
 }
-.meta-footer .votes {
+.meta-footer .cuIcon-like {
   margin-right: 10rpx;
   float: right; 
 }
-.meta-footer .votes:before {
-  content: '\e61a';
-  margin-right: 10rpx; 
+.meta-footer .cuIcon-likefill {
+  margin-right: 10rpx;
+  float: right; 
 }
 .content {
   -webkit-font-smoothing: antialiased;

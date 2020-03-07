@@ -1,6 +1,8 @@
 // pages/category/list/list.js
-Page({
+//获取应用实例
+const app = getApp()
 
+Page({
   /**
    * 页面的初始数据
    */
@@ -92,7 +94,7 @@ Page({
   loadArticles: function () {
     var that = this
     wx.request({
-      url: `https://kangly.club/api/category/article?id=${that.data.id}&page=${that.data.currentPage}`,
+      url: `https://kangly.club/api/category/article?id=${that.data.id}&page=${that.data.currentPage}&token=${app.globalData.token}&jwt=1`,
       success: (res) => {
         if (res.data.message === 'success') {
           if (res.data.articles.length == 0) {
@@ -111,7 +113,15 @@ Page({
           that.setData({
             articles: that.data.articles.concat(res.data.articles)
           })
-        } else {
+        }
+        else if (res.data.code == 1001) {
+          app.userLogin().then(res => {
+            if (res.msg == 'success') {
+              this.loadArticles();
+            }
+          })
+        } 
+        else {
           that.setData({
             info: '列表加载失败，请重试'
           })

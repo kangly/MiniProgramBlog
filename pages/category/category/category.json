@@ -1,5 +1,6 @@
 {
   "usingComponents": {},
   "enablePullDownRefresh": true,
-  "backgroundColor": "#eee"
+  "backgroundColor": "#eee",
+  "navigationBarTitleText": "小康博客 - 类别"
 }

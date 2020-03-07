@@ -1,40 +1,42 @@
 //app.js
 App({
   globalData: {
-    openid: ''
+    token: ''
   },
-  onLaunch: function () {
-    // 展示本地存储能力
-    var logs = wx.getStorageSync('logs') || []
-    logs.unshift(Date.now())
-    wx.setStorageSync('logs', logs)
-
-    // 登录
-    wx.login({
-      success: res => {
-        // 发送 res.code 到后台换取 openId, sessionKey, unionId
-        if (res.code) {
-          //发起网络请求
-          // wx.request({
-          //   url: 'https://kangly.club/api/onLogin',
-          //   data: {
-          //     code: res.code
-          //   },
-          //   success: (res) => {
-          //     if (res.data.msg == 'success'){
-          //       var result = JSON.parse(res.data.data);
-          //       this.globalData.openid = result.openid
-          //     }
-          //   },
-          //   fail: function (error) {
-          //     console.log(error);
-          //   }
-          // })
+  userLogin: function () {
+    var that = this
+    return new Promise(function (resolve, reject) {
+      wx.login({
+        success: res => {
+          if(res.code){
+            wx.request({
+              url: 'https://kangly.club/api/onLogin',
+              data: {
+                code: res.code
+              },
+              success(res) {
+                if(res.data.msg == 'success'){
+                  that.globalData.token = res.data.token
+                  //存入session缓存中
+                  // wx.setStorageSync('token',that.globalData.token)
+                  //promise机制放回成功数据
+                  resolve(res.data);
+                }else{
+                  reject('error');
+                }
+              },
+              fail: function (res) {
+                reject(res);
+                wx.showToast({
+                  title: '系统异常'
+                })
+              }
+            })
+          }else{
+            reject("error");
+          }
         }
-      },
-      fail: function () {
-        console.log('登录获取code失败！');
-      }
+      })
     })
   }
 })
