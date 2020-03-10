@@ -1,5 +1,4 @@
 // pages/category/list/list.js
-//获取应用实例
 const app = getApp()
 
 Page({
@@ -26,42 +25,7 @@ Page({
       id: options.id,
       title: options.title
     })
-    this.loadArticles();
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
+    this.loadArticles()
   },
 
   /**
@@ -70,14 +34,18 @@ Page({
   onReachBottom: function () {
     this.data.currentPage++
     if (this.data.isLoadingMore) {
-      this.data.isLoadingMore = false
-      this.data.info = '我是有底线的'
+      this.setData({
+        isLoadingMore: false,
+        info: '我是有底线的'
+      })
       return
     }
     wx.showLoading({
       title: '加载中...'
     })
-    this.data.isLoadingMore = true
+    this.setData({
+      isLoadingMore: true
+    })
     this.loadArticles()
   },
 
@@ -85,49 +53,48 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-
+    return {
+      title: `小康博客 - ${this.data.title}`,
+      path: `/pages/category/list/list?id=${this.data.id}&title=${this.data.id}`
+    }
   },
 
   /**
    * 加载该类别所属文章
    */
   loadArticles: function () {
-    var that = this
-    wx.request({
-      url: `https://kangly.club/api/category/article?id=${that.data.id}&page=${that.data.currentPage}&token=${app.globalData.token}&jwt=1`,
-      success: (res) => {
-        if (res.data.message === 'success') {
-          if (res.data.articles.length == 0) {
-            if (that.data.currentPage == 1) {
+    app.login().then(() => {
+      var that = this
+      wx.request({
+        url: `https://kangly.club/api/category/article?id=${that.data.id}&page=${that.data.currentPage}&token=${app.globalData.token}&jwt=1`,
+        success: (res) => {
+          if (res.data.message == 'success') {
+            if (res.data.articles.length == 0) {
               that.setData({
-                isLoadingMore: false,
-                info: '哎呀！还没有文章'
-              });
+                info: '我是有底线的'
+              })
             } else {
               that.setData({
-                isLoadingMore: false,
-                info: '我是有底线的'
-              });
+                articles: that.data.articles.concat(res.data.articles)
+              })
             }
+          } else if (res.data.code == 1001) {
+            that.loadArticles()
+          } else {
+            that.setData({
+              info: '数据加载失败'
+            })
           }
+        },
+        fail: function () {
           that.setData({
-            articles: that.data.articles.concat(res.data.articles)
+            info: '数据加载失败'
           })
+        },
+        complete: function () {
+          wx.hideLoading()
         }
-        else if (res.data.code == 1001) {
-          app.userLogin().then(res => {
-            if (res.msg == 'success') {
-              this.loadArticles();
-            }
-          })
-        } 
-        else {
-          that.setData({
-            info: '列表加载失败，请重试'
-          })
-        }
-        wx.hideLoading()
-      }
+      })
     })
   },
 
@@ -136,7 +103,7 @@ Page({
    */
   postDetail: function (event) {
     wx.navigateTo({
-      url: '/pages/detail/detail?id=' + event.currentTarget.dataset.id,
+      url: '/pages/detail/detail?id=' + event.currentTarget.dataset.id
     })
   }
 })

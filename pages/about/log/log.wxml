@@ -4,11 +4,13 @@
     <view class="bg-green content shadow">
       <view class="cu-capsule radius">
         <view class="cu-tag bg-white text-green">v1.4.0</view>
-        <view class="cu-tag line-white">2020/03/07</view>
+        <view class="cu-tag line-white">2020/03/09</view>
       </view>
       <view class="margin-top-sm text-content">
-        <view>1.文章浏览量统计</view>
+        <view>1.文章浏览统计</view>
         <view>2.文章收藏功能</view>
+        <view>3.用户授权登陆</view>
+        <view>4.系统优化</view>
       </view>
     </view>
   </view>

@@ -1,7 +1,6 @@
 <!--pages/about/index/index.wxml-->
 <scroll-view scroll-y class="scrollPage">
   <view class="UCenter-bg">
-    <!-- <image src="../../../images/miniprogram.png" class="png" mode="widthFix"></image> -->
     <view class="text-xl">小康博客
       <text class="text-df">v1.4</text>
     </view>
@@ -9,7 +8,18 @@
       <text>By:Kangly</text>
     </view>
   </view>
+  <view wx:if="{{isHide}}">
+    <view wx:if="{{canIUse}}">
+      <view class="padding flex flex-wrap justify-between align-center bg-white">
+        <button class='cu-btn round bg-blue' type='primary' open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">授权登录</button>
+      </view>
+    </view>
+  </view>
   <view class="cu-list menu card-menu margin-top margin-bottom shadow-lg radius">
+    <view class="cu-item">
+      <view class="cu-avatar round margin-left" style="{{avatarUrl}}"></view>
+      <text class="text-grey">{{nickName}}</text>
+    </view>
     <view class="cu-item arrow">
       <navigator class="content" url="/pages/about/store/store" hover-class="none">
         <text class="cuIcon-likefill text-grey"></text>

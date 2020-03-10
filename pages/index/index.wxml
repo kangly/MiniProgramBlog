@@ -2,15 +2,15 @@
 <view class="container">
   <view class="cards-area">
     <import src="../swiper/swiper.wxml" />
-    <template is="swiper_list" data="{{swiperList}}"></template>
+    <template is="swiper_list" data="{{swiperList,swiperInfo}}"></template>
     <view class="margin-bottom notice_tip">公告：欢迎访问本博客！</view>
     <import src="../search/bar/bar.wxml" />
     <template is="search_bar"></template>
     <view wx:for="{{articles}}" wx:key="item">
-        <view data-id="{{item.id}}" bindtap="postDetail" wx:if="{{item.id}}">
-            <card title="{{item.title}}" content="{{item.summary}}" date="{{item.posted_at}}" views="{{item.views}}" thumbnail="{{item.thumb}}"/>
-        </view>
+      <view data-id="{{item.id}}" bindtap="postDetail" wx:if="{{item.id}}">
+        <card title="{{item.title}}" content="{{item.summary}}" date="{{item.posted_at}}" views="{{item.views}}" thumbnail="{{item.thumb}}"/>
+      </view>
     </view>
   </view>
-  <text class="info" wx:if="{{info}}">{{info}}</text>
+  <text class="info" wx:if="{{listInfo}}">{{listInfo}}</text>
 </view>

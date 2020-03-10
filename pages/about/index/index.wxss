@@ -16,7 +16,3 @@
 .UCenter-bg text {
   opacity: 0.8;
 }
-.UCenter-bg image {
-  width: 300rpx;
-  height: 300rpx;
-}

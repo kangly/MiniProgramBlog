@@ -1,42 +1,42 @@
 //app.js
 App({
   globalData: {
-    token: ''
+    token: '',
+    userInfo: ''
   },
-  userLogin: function () {
+  login: function () {
     var that = this
     return new Promise(function (resolve, reject) {
-      wx.login({
-        success: res => {
-          if(res.code){
-            wx.request({
-              url: 'https://kangly.club/api/onLogin',
-              data: {
-                code: res.code
-              },
-              success(res) {
-                if(res.data.msg == 'success'){
-                  that.globalData.token = res.data.token
-                  //存入session缓存中
-                  // wx.setStorageSync('token',that.globalData.token)
-                  //promise机制放回成功数据
-                  resolve(res.data);
-                }else{
-                  reject('error');
+      if (that.globalData.token) {
+        resolve(that.globalData.token)
+      } else {
+        wx.login({
+          success: res => {
+            if (res.code) {
+              wx.request({
+                url: 'https://kangly.club/api/onLogin',
+                data: {
+                  code: res.code
+                },
+                success(res) {
+                  if (res.data.msg == 'success') {
+                    that.globalData.token = res.data.token
+                    resolve(res.data.token);
+                  } else {
+                    reject('error')
+                  }
+                },
+                fail: function (res) {
+                  reject(res);
+                  wx.showToast({
+                    title: '网络异常'
+                  })
                 }
-              },
-              fail: function (res) {
-                reject(res);
-                wx.showToast({
-                  title: '系统异常'
-                })
-              }
-            })
-          }else{
-            reject("error");
+              })
+            }
           }
-        }
-      })
+        })
+      }
     })
   }
 })

@@ -8,7 +8,8 @@ Page({
    */
   data: {
     categorys: [],
-    info: ''
+    info: '',
+    id: 0
   },
 
   /**
@@ -18,35 +19,7 @@ Page({
     wx.showLoading({
       title: '加载中...'
     })
-    this.loadCategory();
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
+    this.loadCategory()
   },
 
   /**
@@ -60,22 +33,18 @@ Page({
     wx.showLoading({
       title: '加载中...'
     })
-    this.loadCategory();
+    this.loadCategory()
     wx.stopPullDownRefresh()
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
   },
 
   /**
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-
+    return {
+      title: '小康博客 - 类别',
+      path: '/pages/category/category/category'
+    }
   },
 
   /**
@@ -83,36 +52,34 @@ Page({
    */
   loadCategory: function () {
     var that = this
-    wx.showLoading({
-      title: '加载中'
-    })
-    wx.request({
-      url: `https://kangly.club/api/category?token=${app.globalData.token}&jwt=1`,
-      success: (res) => {
-        if (res.data.message === 'success') {
+    app.login().then(() => {
+      wx.showLoading({
+        title: '加载中'
+      })
+      wx.request({
+        url: `https://kangly.club/api/category?token=${app.globalData.token}&jwt=1`,
+        success: (res) => {
+          if (res.data.message === 'success') {
+            that.setData({
+              categorys: res.data.items
+            })
+          } else if (res.data.code == 1001) {
+            that.loadCategory()
+          } else {
+            that.setData({
+              info: '数据加载失败'
+            })
+          }
+        },
+        fail: function () {
           that.setData({
-            categorys: res.data.items
+            info: '数据加载失败'
           })
+        },
+        complete: function () {
+          wx.hideLoading()
         }
-        else if (res.data.code == 1001) {
-          app.userLogin().then(res => {
-            if (res.msg == 'success') {
-              this.loadCategory();
-            }
-          })
-        }
-        else {
-          that.setData({
-            info: '获取类别数据失败，请重试'
-          })
-        }
-      },
-      fail: function () {
-        that.data.info = '获取类别数据失败'
-      },
-      complete: function () {
-        wx.hideLoading()
-      }
+      })
     })
   },
 
@@ -121,7 +88,7 @@ Page({
    */
   postCategoryDetail: function (event) {
     wx.navigateTo({
-      url: '/pages/category/list/list?id=' + event.currentTarget.dataset.id + '&title=' + event.currentTarget.dataset.title,
+      url: '/pages/category/list/list?id=' + event.currentTarget.dataset.id + '&title=' + event.currentTarget.dataset.title
     })
   }
 })

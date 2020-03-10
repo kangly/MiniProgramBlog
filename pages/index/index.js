@@ -1,5 +1,4 @@
 //index.js
-//获取应用实例
 const app = getApp()
 
 Page({
@@ -7,13 +6,14 @@ Page({
    * 页面的初始数据
    */
   data: {
-    articles: [],
     swiperList: [],
-    isLoadingMore: false,
+    cardCur: 0,
+    articles: [],
     currentPage: 1,
-    info: '',
+    isLoadingMore: false,
     keywords: '',
-    cardCur: 0
+    listInfo: '',
+    swiperInfo: ''
   },
 
   /**
@@ -23,49 +23,9 @@ Page({
     wx.showLoading({
       title: '加载中...'
     })
-    // var token = wx.getStorageSync("token");
-    var token = app.globalData.token;
-    if (token==''){
-      app.userLogin().then(res => {
-        if (res.msg=='success') {
-          this.loadArticles();
-          this.loadArticleRecommends();
-          this.towerSwiper('swiperList');
-        }
-      })
-    }else {
-      this.loadArticles();
-      this.loadArticleRecommends();
-      this.towerSwiper('swiperList');
-    }
-  },
-
-  /**
- * 生命周期函数--监听页面初次渲染完成
- */
-  onReady: function () {
-
-  },
-
-  /**
- * 生命周期函数--监听页面显示
- */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
- * 生命周期函数--监听页面卸载
- */
-  onUnload: function () {
-
+    this.loadArticles();
+    this.loadRecommends();
+    this.towerSwiper('swiperList')
   },
 
   /**
@@ -73,20 +33,21 @@ Page({
  */
   onPullDownRefresh: function () {
     this.setData({
-      articles: [],
       swiperList: [],
-      isLoadingMore: false,
-      currentPage: 1,
-      info: '',
-      keywords: '',
       cardCur: 0,
+      articles: [],
+      currentPage: 1,
+      isLoadingMore: false,
+      keywords: '',
+      listInfo: '',
+      swiperInfo: ''
     })
     wx.showLoading({
       title: '加载中...',
       mask: true
     })
-    this.loadArticles();
-    this.loadArticleRecommends();
+    this.loadArticles()
+    this.loadRecommends()
     wx.stopPullDownRefresh()
   },
 
@@ -96,14 +57,18 @@ Page({
   onReachBottom: function () {
     this.data.currentPage++
     if (this.data.isLoadingMore) {
-      this.data.isLoadingMore = false
-      this.data.info = '我是有底线的'
+      this.setData({
+        isLoadingMore: false,
+        listInfo: '我是有底线的'
+      })
       return
     }
     wx.showLoading({
       title: '加载中...'
     })
-    this.data.isLoadingMore = true
+    this.setData({
+      isLoadingMore: true
+    })
     this.loadArticles()
   },
 
@@ -121,76 +86,80 @@ Page({
    * 文章列表
    */
   loadArticles: function () {
-    var that = this
-    wx.request({
-      url: `https://kangly.club/api/article/show?page=${that.data.currentPage}&token=${app.globalData.token}&jwt=1`,
-      success: (res) => {
-        if (res.data.message === 'success') {
-          if (res.data.articles.length == 0) {
-            if (that.data.currentPage == 1) {
+    app.login().then(() => {
+      var that = this
+      wx.request({
+        url: `https://kangly.club/api/article/show?page=${that.data.currentPage}&token=${app.globalData.token}&jwt=1`,
+        success: (res) => {
+          if (res.data.message == 'success') {
+            if (res.data.articles.length == 0) {
               that.setData({
-                isLoadingMore: false,
-                info: '哎呀！还没有文章'
-              });
+                listInfo: '我是有底线的'
+              })
             } else {
               that.setData({
-                isLoadingMore: false,
-                info: '我是有底线的'
-              });
+                articles: that.data.articles.concat(res.data.articles)
+              })
             }
+          } else if (res.data.code == 1001) {
+            that.loadArticles();
+          } else {
+            that.setData({
+              listInfo: '数据加载失败'
+            })
           }
+        },
+        fail: function () {
           that.setData({
-            articles: that.data.articles.concat(res.data.articles)
+            listInfo: '数据加载失败'
           })
-        } 
-        else if (res.data.code==1001){
-          app.userLogin().then(res => {
-            if (res.msg == 'success') {
-              this.loadArticles();
-            }
-          })
+        },
+        complete: function () {
+          wx.hideLoading()
         }
-        else {
-          that.setData({
-            info: '列表加载失败，请重试'
-          })
-        }
-        wx.hideLoading()
-      }
+      })
     })
   },
 
   /**
-   * 文章推荐列表
+   * 推荐列表
    */
-  loadArticleRecommends: function () {
-    var that = this
-    wx.request({
-      url: `https://kangly.club/api/article/recommend?token=${app.globalData.token}&jwt=1`,
-      success: (res) => {
-        if (res.data.message === 'success') {
+  loadRecommends: function () {
+    app.login().then(() => {
+      var that = this
+      wx.request({
+        url: `https://kangly.club/api/article/recommend?token=${app.globalData.token}&jwt=1`,
+        success: (res) => {
+          if (res.data.message == 'success') {
+            that.setData({
+              swiperList: res.data.articles
+            })
+          } else if (res.data.code == 1001) {
+            loadRecommends()
+          } else {
+            that.setData({
+              swiperInfo: '数据加载失败'
+            })
+          }
+        },
+        fail: function () {
           that.setData({
-            swiperList: res.data.articles
+            swiperInfo: '数据加载失败'
           })
+        },
+        complete: function () {
+          wx.hideLoading()
         }
-        else if (res.data.code == 1001) {
-          app.userLogin().then(res => {
-            if (res.msg == 'success') {
-              this.loadArticles();
-            }
-          })
-        }
-        wx.hideLoading()
-      }
+      })
     })
   },
 
   /**
-   * 点击跳转至详情
+   * 点击跳转至详情页
    */
   postDetail: function (event) {
     wx.navigateTo({
-      url: '/pages/detail/detail?id=' + event.currentTarget.dataset.id,
+      url: '/pages/detail/detail?id=' + event.currentTarget.dataset.id
     })
   },
 
@@ -200,13 +169,12 @@ Page({
   wxSearchInput: function (e) {
     if (this.data.keywords){
       wx.navigateTo({
-        url: '/pages/search/search/search?keywords=' + this.data.keywords,
+        url: '/pages/search/search/search?keywords=' + this.data.keywords
       })
     }else{
       wx.showToast({
         title: '请输入搜索内容',
-        icon: 'none',
-        duration: 1500
+        icon: 'none'
       })
     }
   },
