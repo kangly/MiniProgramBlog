@@ -23,8 +23,8 @@ Page({
     wx.showLoading({
       title: '加载中...'
     })
-    this.loadArticles();
-    this.loadRecommends();
+    this.loadArticles()
+    this.loadRecommends()
     this.towerSwiper('swiperList')
   },
 
@@ -55,19 +55,12 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-    this.data.currentPage++
-    if (this.data.isLoadingMore) {
-      this.setData({
-        isLoadingMore: false,
-        listInfo: '我是有底线的'
-      })
+    if (this.data.isLoadingMore===false) { 
       return
     }
+    this.data.currentPage++
     wx.showLoading({
       title: '加载中...'
-    })
-    this.setData({
-      isLoadingMore: true
     })
     this.loadArticles()
   },
@@ -94,23 +87,27 @@ Page({
           if (res.data.message == 'success') {
             if (res.data.articles.length == 0) {
               that.setData({
+                isLoadingMore: false,
                 listInfo: '我是有底线的'
               })
             } else {
               that.setData({
+                isLoadingMore: true,
                 articles: that.data.articles.concat(res.data.articles)
               })
             }
           } else if (res.data.code == 1001) {
-            that.loadArticles();
+            that.loadArticles()
           } else {
             that.setData({
+              isLoadingMore: false,
               listInfo: '数据加载失败'
             })
           }
         },
         fail: function () {
           that.setData({
+            isLoadingMore: false,
             listInfo: '数据加载失败'
           })
         },

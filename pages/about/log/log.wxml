@@ -3,14 +3,24 @@
   <view class="cu-item text-green">
     <view class="bg-green content shadow">
       <view class="cu-capsule radius">
+        <view class="cu-tag bg-white text-green">v1.4.1</view>
+        <view class="cu-tag line-white">2020/03/13</view>
+      </view>
+      <view class="margin-top-sm text-content">
+        <view>修复上拉分页加载bug</view>
+      </view>
+    </view>
+  </view>
+  <view class="cu-item text-green">
+    <view class="bg-green content shadow">
+      <view class="cu-capsule radius">
         <view class="cu-tag bg-white text-green">v1.4.0</view>
         <view class="cu-tag line-white">2020/03/09</view>
       </view>
       <view class="margin-top-sm text-content">
-        <view>1.文章浏览统计</view>
-        <view>2.文章收藏功能</view>
-        <view>3.用户授权登陆</view>
-        <view>4.系统优化</view>
+        <view>1.文章浏览统计、收藏功能</view>
+        <view>2.用户授权登陆</view>
+        <view>3.系统优化</view>
       </view>
     </view>
   </view>
@@ -21,8 +31,7 @@
         <view class="cu-tag line-white">2020/03/05</view>
       </view>
       <view class="margin-top-sm text-content">
-        <view>1.首页下拉刷新推荐轮播</view>
-        <view>2.调整首页推荐轮播显示样式</view>
+        <view>首页下拉刷新推荐轮播及样式调整</view>
       </view>
     </view>
   </view>
@@ -57,8 +66,7 @@
       <view class="margin-top-sm text-content">
         <view>1.底部关于导航页面调整</view>
         <view>2.优化页面，减小体积</view>
-        <view>3.增加首页下拉刷新</view>
-        <view>4.增加类别页下拉刷新</view>
+        <view>3.增加首页、类别页下拉刷新</view>
       </view>
     </view>
   </view>
