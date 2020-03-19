@@ -10,8 +10,8 @@
     <template is="wxParse" data="{{wxParseData:article_content.nodes}}"/>
   </view>
   <view class="meta-footer">
-    <text class="cuIcon-attentionfill">{{article.views}}</text>
-    <text class="{{DotStyle?'cuIcon-likefill':'cuIcon-like'}}" bindtap="postStore" data-id="{{article.id}}" data-store="{{article.store}}"></text>
+    <text class="cuIcon-attentionfill" style="font-size:36rpx">{{article.views}}</text>
+    <text class="{{DotStyle?'cuIcon-likefill':'cuIcon-like'}}" style="font-size:36rpx" bindtap="postStore" data-id="{{article.id}}" data-store="{{article.store}}"></text>
   </view>
   <text class="info" wx:if="{{info}}">{{info}}</text>
 </view>

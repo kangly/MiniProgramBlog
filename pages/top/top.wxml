@@ -1,0 +1,4 @@
+<!--pages/top/top.wxml-->
+<template name="goTop">
+  <image src="/images/goTop.png" class="goTop" hidden="{{floorstatus}}" bindtap="goTop"></image>
+</template>

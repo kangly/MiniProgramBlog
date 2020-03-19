@@ -1,12 +1,16 @@
 <!--pages/search/search/search.wxml-->
 <view class="container">
-  <view class="title margin-bottom">【{{keywords}}】的搜索结果如下：</view>
+  <view class="title margin-bottom text-xl">
+    关键词 <text class="text-red">{{keywords}}</text> 的搜索结果如下
+  </view>
   <view class="cards-area">
     <view wx:for="{{articles}}" wx:key="item">
       <view data-id="{{item.id}}" bindtap="postDetail" wx:if="{{item.id}}">
         <card title="{{item.title}}" content="{{item.summary}}" date="{{item.posted_at}}" views="{{item.views}}" thumbnail="{{item.thumb}}"/>
       </view>
     </view>
+    <import src="/pages/top/top.wxml" />
+    <template is="goTop" data="{{floorstatus}}"></template>
   </view>
   <text class="info" wx:if="{{info}}">{{info}}</text>
 </view>

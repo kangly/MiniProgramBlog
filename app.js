@@ -21,13 +21,13 @@ App({
                 success(res) {
                   if (res.data.msg == 'success') {
                     that.globalData.token = res.data.token
-                    resolve(res.data.token);
+                    resolve(res.data.token)
                   } else {
                     reject('error')
                   }
                 },
                 fail: function (res) {
-                  reject(res);
+                  reject(res)
                   wx.showToast({
                     title: '网络异常'
                   })

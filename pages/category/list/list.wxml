@@ -1,12 +1,16 @@
 <!--pages/category/list/list.wxml-->
 <view class="container">
-  <view class="title margin-bottom">{{title}}</view>
+  <view class="title margin-bottom text-xl">
+    分类 <text class="text-red">{{title}}</text> 下的文章
+  </view>
   <view class="cards-area">
     <view wx:for="{{articles}}" wx:key="item">
       <view data-id="{{item.id}}" bindtap="postDetail" wx:if="{{item.id}}">
         <card title="{{item.title}}" content="{{item.summary}}" date="{{item.posted_at}}" views="{{item.views}}" thumbnail="{{item.thumb}}"/>
       </view>
     </view>
+    <import src="/pages/top/top.wxml" />
+    <template is="goTop" data="{{floorstatus}}"></template>
   </view>
   <text class="info" wx:if="{{info}}">{{info}}</text>
 </view>

@@ -11,6 +11,8 @@
         <card title="{{item.title}}" content="{{item.summary}}" date="{{item.posted_at}}" views="{{item.views}}" thumbnail="{{item.thumb}}"/>
       </view>
     </view>
+    <import src="/pages/top/top.wxml" />
+    <template is="goTop" data="{{floorstatus}}"></template>
   </view>
   <text class="info" wx:if="{{listInfo}}">{{listInfo}}</text>
 </view>

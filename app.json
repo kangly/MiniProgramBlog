@@ -10,7 +10,8 @@
     "pages/about/log/log",
     "pages/about/about/about",
     "pages/swiper/swiper",
-    "pages/about/store/store"
+    "pages/about/store/store",
+    "pages/top/top"
   ],
   "window": {
     "backgroundTextStyle": "light",

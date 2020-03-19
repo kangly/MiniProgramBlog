@@ -29,3 +29,10 @@
   width: 70rpx;
   height: 70rpx; 
 }
+.goTop{
+  position: fixed;
+  height: 80rpx;
+  width: 80rpx;
+  bottom: 30rpx;
+  right: 30rpx;
+}

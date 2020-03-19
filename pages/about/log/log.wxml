@@ -3,6 +3,17 @@
   <view class="cu-item text-green">
     <view class="bg-green content shadow">
       <view class="cu-capsule radius">
+        <view class="cu-tag bg-white text-green">v1.4.2</view>
+        <view class="cu-tag line-white">2020/03/19</view>
+      </view>
+      <view class="margin-top-sm text-content">
+        <view>界面优化</view>
+      </view>
+    </view>
+  </view>
+  <view class="cu-item text-green">
+    <view class="bg-green content shadow">
+      <view class="cu-capsule radius">
         <view class="cu-tag bg-white text-green">v1.4.1</view>
         <view class="cu-tag line-white">2020/03/13</view>
       </view>
