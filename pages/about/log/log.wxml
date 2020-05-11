@@ -3,6 +3,17 @@
   <view class="cu-item text-green">
     <view class="bg-green content shadow">
       <view class="cu-capsule radius">
+        <view class="cu-tag bg-white text-green">v1.4.3</view>
+        <view class="cu-tag line-white">2020/05/11</view>
+      </view>
+      <view class="margin-top-sm text-content">
+        <view>新增类别页面(垂直导航)</view>
+      </view>
+    </view>
+  </view>
+  <view class="cu-item text-green">
+    <view class="bg-green content shadow">
+      <view class="cu-capsule radius">
         <view class="cu-tag bg-white text-green">v1.4.2</view>
         <view class="cu-tag line-white">2020/03/19</view>
       </view>

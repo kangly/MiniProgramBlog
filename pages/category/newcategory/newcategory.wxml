@@ -1,0 +1,21 @@
+<!--pages/category/newcategory/newcategory.wxml-->
+<view class="VerticalBox">
+
+  <scroll-view class="VerticalNav nav" scroll-y scroll-with-animation scroll-top="{{VerticalNavTop}}" style="height:calc(100vh)">
+    <view class="cu-item {{index==TabCur?'text-green cur':''}}" wx:for="{{list}}" wx:key="item" bindtap='tabSelect' data-id="{{item.id}}">
+      {{item.title}}
+    </view>
+  </scroll-view>
+
+  <scroll-view class="VerticalMain" scroll-y scroll-with-animation style="height:calc(100vh)" scroll-into-view="main-{{MainCur}}">
+    <view class="cards-area">
+      <view wx:for="{{content}}" wx:key="item">
+        <view data-id="{{item.id}}" bindtap="postDetail" wx:if="{{item.id}}">
+          <card title="{{item.title}}" content="{{item.summary}}" date="{{item.posted_at}}" views="{{item.views}}" thumbnail="{{item.thumb}}"/>
+        </view>
+      </view>
+    </view>
+    <text class="info" style="margin-top:15rpx;display:flex;align-items:center;justify-content:center;" wx:if="{{info}}">{{info}}</text>
+  </scroll-view>
+  
+</view>

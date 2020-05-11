@@ -5,6 +5,7 @@
     "pages/search/bar/bar",
     "pages/search/search/search",
     "pages/category/category/category",
+    "pages/category/newcategory/newcategory",
     "pages/category/list/list",
     "pages/about/index/index",
     "pages/about/log/log",
@@ -35,7 +36,13 @@
       },
       {
         "pagePath": "pages/category/category/category",
-        "text": "类别",
+        "text": "类别(旧)",
+        "iconPath": "/images/category.png",
+        "selectedIconPath": "/images/category_h1.png"
+      },
+      {
+        "pagePath": "pages/category/newcategory/newcategory",
+        "text": "类别(新)",
         "iconPath": "/images/category.png",
         "selectedIconPath": "/images/category_h1.png"
       },

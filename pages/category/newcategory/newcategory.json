@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "card": "/components/card/card"
+  },
+  "enablePullDownRefresh": true,
+  "backgroundColor": "#eee",
+  "navigationBarTitleText": "小康博客 - 类别"
+}
