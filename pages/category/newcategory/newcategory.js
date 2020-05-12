@@ -10,8 +10,7 @@ Page({
     id: 1,
     info: '',
     list: [],
-    content: [],
-    load: true
+    content: []
   },
   onLoad() {
     wx.showLoading({
@@ -116,20 +115,20 @@ Page({
       })
     })
   },
-    /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-    if (this.data.isLoadingMore === false) {
+  VerticalMain(e) {
+    if (this.data.isLoadingMore===false) {
       return
     }
     this.data.currentPage++
     wx.showLoading({
       title: '加载中...'
     })
+    this.setData({
+      isLoadingMore: false
+    })
     this.loadArticles()
   },
-    /**
+  /**
    * 点击标题跳转到详情页
    */
   postDetail: function (event) {

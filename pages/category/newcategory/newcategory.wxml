@@ -7,7 +7,7 @@
     </view>
   </scroll-view>
 
-  <scroll-view class="VerticalMain" scroll-y scroll-with-animation style="height:calc(100vh)" scroll-into-view="main-{{MainCur}}">
+  <scroll-view class="VerticalMain" scroll-y="true" scroll-with-animation style="height:calc(100vh)" scroll-into-view="main-{{MainCur}}" bindscroll="VerticalMain">
     <view class="cards-area">
       <view wx:for="{{content}}" wx:key="item">
         <view data-id="{{item.id}}" bindtap="postDetail" wx:if="{{item.id}}">

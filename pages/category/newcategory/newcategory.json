@@ -2,7 +2,7 @@
   "usingComponents": {
     "card": "/components/card/card"
   },
-  "enablePullDownRefresh": true,
+  "enablePullDownRefresh": false,
   "backgroundColor": "#eee",
   "navigationBarTitleText": "小康博客 - 类别"
 }

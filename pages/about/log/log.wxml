@@ -3,6 +3,17 @@
   <view class="cu-item text-green">
     <view class="bg-green content shadow">
       <view class="cu-capsule radius">
+        <view class="cu-tag bg-white text-green">v1.4.4</view>
+        <view class="cu-tag line-white">2020/05/12</view>
+      </view>
+      <view class="margin-top-sm text-content">
+        <view>修复新增类别页面的下拉刷新和上拉加载的bug</view>
+      </view>
+    </view>
+  </view>
+  <view class="cu-item text-green">
+    <view class="bg-green content shadow">
+      <view class="cu-capsule radius">
         <view class="cu-tag bg-white text-green">v1.4.3</view>
         <view class="cu-tag line-white">2020/05/11</view>
       </view>
